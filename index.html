@@ -21,10 +21,6 @@
   .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
 
   header.hero{border-bottom:2px solid var(--ink);padding:56px 0 32px;}
-  .hero-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
-  .hero-text{flex:1;min-width:0;}
-  .hero-photo{flex-shrink:0;}
-  .hero-photo img{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--brass);display:block;}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:10px;}
   h1{font-family:'Source Serif 4',serif;font-weight:700;font-size:38px;letter-spacing:.2px;margin-bottom:6px;}
   .role{font-size:16px;color:var(--ink-soft);margin-bottom:2px;}
@@ -32,11 +28,6 @@
   .hero-links{margin-top:20px;display:flex;gap:18px;flex-wrap:wrap;font-size:14px;}
   .hero-links a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--brass);padding-bottom:1px;}
   .hero-links a:hover{color:var(--brass);}
-
-  @media(max-width:600px){
-    .hero-inner{flex-direction:column-reverse;align-items:flex-start;gap:16px;}
-    .hero-photo img{width:80px;height:80px;}
-  }
 
   nav.subnav{display:flex;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--paper);z-index:10;flex-wrap:wrap;}
   nav.subnav a{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);text-decoration:none;font-weight:500;}
@@ -46,6 +37,7 @@
   section:last-of-type{border-bottom:none;}
   .sec-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:10px;}
   h2{font-family:'Source Serif 4',serif;font-weight:600;font-size:22px;margin-bottom:16px;}
+  h3{font-family:'Source Serif 4',serif;font-weight:600;font-size:16px;margin:24px 0 10px;color:var(--ink);}
   p{font-size:15px;color:var(--ink-soft);max-width:680px;}
 
   .interest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px;}
@@ -53,15 +45,21 @@
   .interest-card .n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brass);margin-bottom:6px;}
   .interest-card p{font-size:14px;margin:0;color:var(--ink);}
 
-  .course-list{list-style:none;margin-top:14px;}
-  .course-list li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-  .course-list li span.tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brass);white-space:nowrap;}
+  .course-list{list-style:none;margin-top:14px;columns:2;column-gap:24px;}
+  .course-list li{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;break-inside:avoid;}
 
-  .placeholder-note{font-size:13px;color:var(--brass);background:var(--parchment);border-left:3px solid var(--brass);padding:10px 14px;border-radius:0 3px 3px 0;margin-top:16px;}
+  .pub-list{list-style:none;counter-reset:pub;margin-top:12px;}
+  .pub-list li{counter-increment:pub;padding:10px 0 10px 34px;position:relative;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);}
+  .pub-list li::before{content:counter(pub);position:absolute;left:0;top:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--brass);}
+  .pub-list li em{font-style:italic;color:var(--ink-soft);}
 
-  .pub-list{list-style:none;counter-reset:pub;margin-top:16px;}
-  .pub-list li{counter-increment:pub;padding:12px 0 12px 34px;position:relative;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);}
-  .pub-list li::before{content:counter(pub);position:absolute;left:0;top:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--brass);}
+  table.students{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px;}
+  table.students th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass);border-bottom:2px solid var(--ink);padding:6px 8px;}
+  table.students td{padding:8px;border-bottom:1px solid var(--line);}
+
+  .service-list{list-style:none;margin-top:14px;}
+  .service-list li{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .service-list li span.dur{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brass);white-space:nowrap;}
 
   footer{padding:32px 0 60px;font-size:13px;color:var(--ink-soft);}
   footer a{color:var(--brass);}
@@ -69,6 +67,7 @@
   @media(max-width:600px){
     h1{font-size:28px;}
     nav.subnav{gap:14px;}
+    .course-list{columns:1;}
   }
 </style>
 </head>
@@ -76,19 +75,16 @@
 
 <div class="wrap">
   <header class="hero">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <div class="eyebrow">Faculty profile</div>
-        <h1>Amit Mallick</h1>
-        <div class="role">Assistant Professor, Department of Electrical Engineering</div>
-        <div class="affil">Veer Surendra Sai University of Technology (VSSUT), Burla, Odisha, India</div>
-        <div class="hero-links">
-          <a href="mailto:youremail@vssut.ac.in">Email</a>
-          <a href="#">Google Scholar</a>
-          <a href="#">ORCID</a>
-          <a href="#">CV (PDF)</a>
-        </div>
-      
+    <div class="eyebrow">Faculty profile</div>
+    <h1>Amit Mallick</h1>
+    <div class="role">Assistant Professor, Department of Electrical Engineering</div>
+    <div class="affil">Veer Surendra Sai University of Technology (VSSUT), Burla, Odisha, India</div>
+    <div class="hero-links">
+      <a href="mailto:amitmallick_ee@vssut.ac.in">Email (primary)</a>
+      <a href="mailto:amitmallickvssut@gmail.com">Email (secondary)</a>
+      <a href="https://orcid.org/0000-0002-9942-3649">ORCID</a>
+      <a href="https://scholar.google.com/citations?user=b4BHcpYAAAAJ&hl=en">Google Scholar</a>
+      <a href="cv.pdf">CV (PDF)</a>
     </div>
   </header>
 
@@ -103,50 +99,101 @@
   <section id="research">
     <div class="sec-label">Research</div>
     <h2>Robust, delay-resilient distributed secondary control for islanded AC microgrids</h2>
-    <p>Working on PhD research (VSSUT, Registration No. 2110050101) developing robust, delay-resilient distributed secondary control strategies for islanded autonomous AC microgrids, focused on maintaining voltage and frequency regulation and stable power sharing under communication delay and uncertainty.</p>
+    <p>Pursuing PhD research at VSSUT, Burla, developing robust, delay-resilient distributed secondary control strategies for islanded autonomous AC microgrids, focused on maintaining voltage and frequency regulation and stable power sharing under communication delay and uncertainty.</p>
     <div class="interest-grid">
-      <div class="interest-card"><div class="n">01</div><p>Microgrid control</p></div>
-      <div class="interest-card"><div class="n">02</div><p>Distributed secondary control</p></div>
-      <div class="interest-card"><div class="n">03</div><p>Power systems</p></div>
-      <div class="interest-card"><div class="n">04</div><p>Power electronics</p></div>
+      <div class="interest-card"><div class="n">01</div><p>Microgrid stability and control</p></div>
+      <div class="interest-card"><div class="n">02</div><p>Communication-delay-resilient control</p></div>
+      <div class="interest-card"><div class="n">03</div><p>Power system operation and control</p></div>
+      <div class="interest-card"><div class="n">04</div><p>Power electronics converters</p></div>
+      <div class="interest-card"><div class="n">05</div><p>Multi-agent microgrid control systems</p></div>
     </div>
   </section>
 
   <section id="teaching">
     <div class="sec-label">Teaching</div>
-    <h2>Courses</h2>
-    <p>Teaches across power systems, power electronics, and basic electrical engineering at the undergraduate and postgraduate level at VSSUT.</p>
+    <h2>Courses taught</h2>
+    <p>Undergraduate courses in power systems, power electronics, and basic electrical engineering at VSSUT, Burla.</p>
     <ul class="course-list">
-      <li><span>Power Systems</span> <span class="tag">Add course code / semester</span></li>
-      <li><span>Power Electronics</span> <span class="tag">Add course code / semester</span></li>
-      <li><span>Basic Electrical Engineering</span> <span class="tag">Add course code / semester</span></li>
+      <li>Basic Electrical Engineering</li>
+      <li>Electronics Circuits</li>
+      <li>Lighting and Electrical Services</li>
+      <li>Building Services II</li>
+      <li>Digital Circuits &amp; Design</li>
+      <li>Power Electronics</li>
+      <li>Elements of Power Electronics</li>
+      <li>Electric Power Transmission and Distribution</li>
+      <li>Power System Operation and Control</li>
+      <li>Electric Drives and Traction</li>
     </ul>
-    <div class="placeholder-note">Replace these rows with your actual current course codes, semesters, and any lecture notes or syllabus links.</div>
   </section>
 
   <section id="publications">
     <div class="sec-label">Publications</div>
     <h2>Selected publications</h2>
+
+    <h3>Peer-reviewed journal articles (SCI-indexed)</h3>
     <ol class="pub-list">
-      <li>Add your first publication here — author list, title, journal/conference, year, DOI or link.</li>
-      <li>Add your second publication here.</li>
-      <li>Add your third publication here.</li>
+      <li>A. Mallick, J.K. Pradhan, R. Pradhan, P. Pratik, B.N. Kar, "Robust multi-input multi-output integral-proportional controller for interconnected microgrid operation," <em>Electric Power Systems Research</em>, vol. 253, p. 112509, 2026.</li>
+      <li>A. Mallick, J.K. Pradhan, R. Pradhan, K.S.K. Achary, S. Rath, A. Guha, "A gain scheduling control framework for mitigation of time varying network latency in autonomous AC microgrids," <em>IEEE Transactions on Industrial Informatics</em>, vol. 21, pp. 347–356, 2025.</li>
+      <li>B.N. Kar, P. Samuel, J.K. Pradhan, A. Mallick, "Grid-connected solar photovoltaic-fed brushless DC motor drive for water pumping system using colliding body optimization technique," <em>Circuit World</em>, vol. 50, pp. 18–34, 2024.</li>
+      <li>S. Panda, G.R. Biswal, J.K. Pradhan, B. Subudhi, A. Mallick, "Development of prototype fractional order controller for a grid-tied photovoltaic system," <em>IEEE Transactions on Circuits and Systems II: Express Briefs</em>, vol. 69, pp. 2171–2175, 2021.</li>
     </ol>
-    <div class="placeholder-note">Tip: export your entries from your Faculty Activity Register tracker and paste the "Journal publication" and "Conference" rows here.</div>
+
+    <h3>Conference publications</h3>
+    <ol class="pub-list">
+      <li>A. Mallick, J.K. Pradhan, R. Pradhan, "Impact of communication delay and stability analysis of AC microgrid," in <em>Proc. International Conference on Power Electronics and Energy (ICPEE)</em>, KIIT Bhubaneswar, pp. 1–6, 2025.</li>
+      <li>A. Mallick, R. Singh, J.K. Pradhan, R. Pradhan, R.K. Mishra, "Event-driven control strategies for efficient microgrid operation," in <em>Proc. 4th International Conference on Smart Technologies for Power, Energy and Control (STPEC)</em>, NIT Goa, pp. 1–6, 2025.</li>
+    </ol>
+
+    <h3>Patents</h3>
+    <ol class="pub-list">
+      <li>J.K. Pradhan, Amit Mallick, M.K. Bera, R.K. Mishra, Vasundhara, "Fused DB37 distribution board for real-time simulator input/output with integrated channel wise protection," Application No. 202631051688, filed 23 April 2026 (Intellectual Property India).</li>
+      <li>J.K. Pradhan, Amit Mallick, M.K. Bera, R.K. Mishra, Vasundhara, "System for determining delay margin in alternating current microgrid and method of determining thereof," Application No. 202631051803, filed 23 April 2026 (Intellectual Property India).</li>
+    </ol>
   </section>
 
   <section id="students">
     <div class="sec-label">Student guidance</div>
-    <h2>M.Tech students guided</h2>
-    <p>Has guided multiple M.Tech students to completion at VSSUT.</p>
-    <div class="placeholder-note">Add a table here with student name, thesis title, and year of completion once you're ready to publish specifics.</div>
+    <h2>M.Tech scholars supervised</h2>
+    <p>12 M.Tech scholars guided to completion at VSSUT, Burla (2018–2026).</p>
+    <table class="students">
+      <thead><tr><th>Scholar</th><th>Specialization</th><th>Year</th></tr></thead>
+      <tbody>
+        <tr><td>Sangram Sekhar</td><td>Power Electronics &amp; Control</td><td>June 2018</td></tr>
+        <tr><td>Manas Ranjan Jena</td><td>Power Electronics &amp; Control</td><td>June 2019</td></tr>
+        <tr><td>Deepak Kumar Bagal</td><td>Power Electronics &amp; Control</td><td>June 2020</td></tr>
+        <tr><td>Suvadipa Sahoo</td><td>Power System Engineering</td><td>June 2020</td></tr>
+        <tr><td>Himanshu Pradhan</td><td>Power Electronics &amp; Control</td><td>June 2021</td></tr>
+        <tr><td>Siddharth Choudhury</td><td>Power System Engineering</td><td>June 2021</td></tr>
+        <tr><td>Nishita Nayak (Dual Degree)</td><td>Power Electronics &amp; Control</td><td>May 2022</td></tr>
+        <tr><td>Anmol Hemron</td><td>Power Electronics &amp; Control</td><td>May 2022</td></tr>
+        <tr><td>Dhananjaya Mahakur (Dual Degree)</td><td>Power Electronics &amp; Control</td><td>May 2023</td></tr>
+        <tr><td>Yassir K. Y. Alumubaied</td><td>Power System Engineering</td><td>May 2024</td></tr>
+        <tr><td>Samrat Sahoo</td><td>Power Electronics &amp; Control</td><td>May 2025</td></tr>
+        <tr><td>Soumya Ranjan Bhoi</td><td>Power System Engineering</td><td>May 2026</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <section id="service">
     <div class="sec-label">Service and administrative duties</div>
     <h2>University service</h2>
-    <p>Holds departmental Electrical Maintenance Coordinator duties and other coordination roles at VSSUT.</p>
-    <div class="placeholder-note">List committee memberships, coordinator roles, and organizing responsibilities here as they accumulate.</div>
+    <ul class="service-list">
+      <li><span>Electrical Maintenance Coordinator (University)</span><span class="dur">2021–present</span></li>
+      <li><span>Assistant Warden, Rohini Hall of Residence (University)</span><span class="dur">2019–2022</span></li>
+      <li><span>Document scrutiny committee — UG/PG/spot/lateral admissions (University)</span><span class="dur">Every academic year</span></li>
+      <li><span>Anti-ragging and fest invigilation (University)</span><span class="dur">Every academic year</span></li>
+      <li><span>Convocation apex committee — sound and electricity (University)</span><span class="dur">14th, 16th, 17th convocation</span></li>
+      <li><span>Faculty Advisor, Electrical Engineering Society (Department)</span><span class="dur">2024–2026</span></li>
+      <li><span>M.Tech admission scrutiny committee (Department)</span><span class="dur">2023</span></li>
+      <li><span>PhD admission scrutiny committee (Department)</span><span class="dur">2026</span></li>
+      <li><span>Exam coordinator, department (Department)</span><span class="dur">2022–2024</span></li>
+      <li><span>UG/PG viva coordination — Dissertation Phase II (Department)</span><span class="dur">2022–2024</span></li>
+      <li><span>Departmental Research Group member (Department)</span><span class="dur">2021–present</span></li>
+      <li><span>Departmental fest organising committee — Resonance 2025 (Department)</span><span class="dur">2024–2025</span></li>
+      <li><span>NBA peer team visit — Criterion 5 preparation (Department)</span><span class="dur">2025</span></li>
+      <li><span>UG student mentoring (Department)</span><span class="dur">Every academic year</span></li>
+    </ul>
   </section>
 
   <footer>
