@@ -45,29 +45,12 @@
   .interest-card .n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brass);margin-bottom:6px;}
   .interest-card p{font-size:14px;margin:0;color:var(--ink);}
 
-  .course-list{list-style:none;margin-top:14px;columns:2;column-gap:24px;}
-  .course-list li{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;break-inside:avoid;}
-
-  .pub-list{list-style:none;counter-reset:pub;margin-top:12px;}
-  .pub-list li{counter-increment:pub;padding:10px 0 10px 34px;position:relative;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);}
-  .pub-list li::before{content:counter(pub);position:absolute;left:0;top:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--brass);}
-  .pub-list li em{font-style:italic;color:var(--ink-soft);}
-
-  table.students{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px;}
-  table.students th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass);border-bottom:2px solid var(--ink);padding:6px 8px;}
-  table.students td{padding:8px;border-bottom:1px solid var(--line);}
-
-  .service-list{list-style:none;margin-top:14px;}
-  .service-list li{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-  .service-list li span.dur{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brass);white-space:nowrap;}
-
   footer{padding:32px 0 60px;font-size:13px;color:var(--ink-soft);}
   footer a{color:var(--brass);}
 
   @media(max-width:600px){
     h1{font-size:28px;}
     nav.subnav{gap:14px;}
-    .course-list{columns:1;}
   }
 </style>
 </head>
@@ -84,23 +67,20 @@
       <a href="mailto:amitmallickvssut@gmail.com">Email (Secondary)</a>
       <a href="https://orcid.org/0000-0002-9942-3649">ORCID</a>
       <a href="https://scholar.google.com/citations?user=b4BHcpYAAAAJ&hl=en">Google Scholar</a>
-      <a href="cv.html">CV</a>
+      <a href="cv.html">Full CV</a>
     </div>
   </header>
 
   <nav class="subnav">
     <a href="index.html">Profile</a>
-    <!--
     <a href="#research">Research</a>
-    -->
     <a href="teaching.html">Teaching</a>
     <a href="publications.html">Publications</a>
     <a href="students.html">Students</a>
-    <a href="#service">Service</a>
+    <a href="service.html">Service</a>
     <a href="cv.html">Full CV</a>
   </nav>
 
-  <!--
   <section id="research">
     <div class="sec-label">Research</div>
     <h2>Robust, delay-resilient distributed secondary control for islanded AC microgrids</h2>
@@ -113,7 +93,6 @@
       <div class="interest-card"><div class="n">05</div><p>Multi-agent microgrid control systems</p></div>
     </div>
   </section>
-  -->
 
   <section id="teaching">
     <div class="sec-label">Teaching</div>
@@ -139,22 +118,8 @@
   <section id="service">
     <div class="sec-label">Service and administrative duties</div>
     <h2>University service</h2>
-    <ul class="service-list">
-      <li><span>Electrical Maintenance Coordinator (University)</span><span class="dur">2021–present</span></li>
-      <li><span>Assistant Warden, Rohini Hall of Residence (University)</span><span class="dur">2019–2022</span></li>
-      <li><span>Document scrutiny committee — UG/PG/spot/lateral admissions (University)</span><span class="dur">Every academic year</span></li>
-      <li><span>Anti-ragging and fest invigilation (University)</span><span class="dur">Every academic year</span></li>
-      <li><span>Convocation apex committee — sound and electricity (University)</span><span class="dur">14th, 16th, 17th convocation</span></li>
-      <li><span>Faculty Advisor, Electrical Engineering Society (Department)</span><span class="dur">2024–2026</span></li>
-      <li><span>M.Tech admission scrutiny committee (Department)</span><span class="dur">2023</span></li>
-      <li><span>PhD admission scrutiny committee (Department)</span><span class="dur">2026</span></li>
-      <li><span>Exam coordinator, department (Department)</span><span class="dur">2022–2024</span></li>
-      <li><span>UG/PG viva coordination — Dissertation Phase II (Department)</span><span class="dur">2022–2024</span></li>
-      <li><span>Departmental Research Group member (Department)</span><span class="dur">2021–present</span></li>
-      <li><span>Departmental fest organising committee — Resonance 2025 (Department)</span><span class="dur">2024–2025</span></li>
-      <li><span>NBA peer team visit — Criterion 5 preparation (Department)</span><span class="dur">2025</span></li>
-      <li><span>UG student mentoring (Department)</span><span class="dur">Every academic year</span></li>
-    </ul>
+    <p>University-level and departmental-level administrative and committee duties at VSSUT, Burla.</p>
+    <p><a href="service.html" style="color:var(--brass);">View university &amp; departmental duties &rarr;</a></p>
   </section>
 
   <footer>
