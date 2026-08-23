@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum Vitae — Amit Mallick</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink:#1b2a4a;
+    --ink-soft:#3d4c6e;
+    --paper:#faf7ef;
+    --parchment:#efe7d3;
+    --line:#d8cdaf;
+    --brass:#8a6a2f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
+
+  header.hero{border-bottom:2px solid var(--ink);padding:40px 0 24px;}
+  .back{font-size:13px;color:var(--brass);text-decoration:none;display:inline-block;margin-bottom:16px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:8px;}
+  h1{font-family:'Source Serif 4',serif;font-weight:700;font-size:32px;margin-bottom:6px;}
+  .role{font-size:15px;color:var(--ink-soft);}
+  .hero-links{margin-top:16px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px;}
+  .hero-links a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--brass);padding-bottom:1px;}
+
+  section{padding:36px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .sec-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:10px;}
+  h2{font-family:'Source Serif 4',serif;font-weight:600;font-size:20px;margin-bottom:14px;}
+  h3{font-family:'Source Serif 4',serif;font-weight:600;font-size:15px;margin:20px 0 8px;}
+  p{font-size:14px;color:var(--ink-soft);}
+
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px;}
+  th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--brass);border-bottom:2px solid var(--ink);padding:6px 8px;}
+  td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+
+  ul.plain,ol.plain{list-style:none;margin-top:10px;}
+  ul.plain li,ol.plain li{padding:6px 0;font-size:14px;border-bottom:1px solid var(--line);}
+
+  ol.pub-list{list-style:none;counter-reset:pub;margin-top:10px;}
+  ol.pub-list li{counter-increment:pub;padding:9px 0 9px 30px;position:relative;font-size:13.5px;border-bottom:1px solid var(--line);}
+  ol.pub-list li::before{content:counter(pub);position:absolute;left:0;top:9px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brass);}
+  ol.pub-list em{font-style:italic;color:var(--ink-soft);}
+
+  footer{padding:28px 0 50px;font-size:12px;color:var(--ink-soft);}
+
+  @media(max-width:600px){
+    h1{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <a class="back" href="index.html">&larr; Back to profile</a>
+    <div class="eyebrow">Curriculum vitae</div>
+    <h1>Amit Mallick</h1>
+    <div class="role">Assistant Professor, Department of Electrical Engineering, VSSUT, Burla</div>
+    <div class="hero-links">
+      <a href="mailto:amitmallick_ee@vssut.ac.in">Email (Primary)</a>
+      <a href="mailto:amitmallickvssut@gmail.com">Email (Secondary)</a>
+      <a href="https://orcid.org/0000-0002-9942-3649">ORCID</a>
+      <a href="https://scholar.google.com/citations?user=b4BHcpYAAAAJ&hl=en">Google Scholar</a>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-label">Personal &amp; employment details</div>
+    <h2>Overview</h2>
+    <table>
+      <tr><td>Present designation</td><td>Assistant Professor</td></tr>
+      <tr><td>Department</td><td>Electrical Engineering</td></tr>
+      <tr><td>University</td><td>Veer Surendra Sai University of Technology, Burla</td></tr>
+      <tr><td>Date of joining current post</td><td>21 October 2016</td></tr>
+      <tr><td>Total teaching / research experience</td><td>10 years 6 months</td></tr>
+      <tr><td>Nature of post</td><td>Regular</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Academic qualifications</div>
+    <h2>Education</h2>
+    <table>
+      <thead><tr><th>Degree</th><th>Specialization</th><th>Institute</th><th>Year</th></tr></thead>
+      <tbody>
+        <tr><td>Ph.D.</td><td>Electrical Engineering</td><td>VSSUT, Burla</td><td>Joined 2021 (synopsis presented)</td></tr>
+        <tr><td>M.Tech</td><td>Power System Engineering</td><td>VSSUT, Burla</td><td>2015</td></tr>
+        <tr><td>B.Tech</td><td>Electrical &amp; Electronics Engineering</td><td>NMIET, Bhubaneswar (BPUT)</td><td>2013</td></tr>
+        <tr><td>+2</td><td>Science</td><td>College of Basic Science and Humanities, Bhubaneswar</td><td>2009</td></tr>
+        <tr><td>Matriculation</td><td>—</td><td>Govt. High School, IRC Village, Bhubaneswar</td><td>2007</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Research</div>
+    <h2>Research interests</h2>
+    <ul class="plain">
+      <li>Microgrid stability and control</li>
+      <li>Communication-delay-resilient control</li>
+      <li>Power system operation and control</li>
+      <li>Power electronics converters</li>
+      <li>Multi-agent microgrid control systems</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-label">Teaching</div>
+    <h2>Teaching experience</h2>
+    <table>
+      <thead><tr><th>#</th><th>Course title</th><th>Level</th><th>Semester</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Basic Electrical Engineering</td><td>UG</td><td>1st &amp; 2nd</td></tr>
+        <tr><td>2</td><td>Electronics Circuits</td><td>UG</td><td>4th</td></tr>
+        <tr><td>3</td><td>Lighting and Electrical Services</td><td>UG</td><td>4th</td></tr>
+        <tr><td>4</td><td>Building Services II</td><td>UG</td><td>4th</td></tr>
+        <tr><td>5</td><td>Digital Circuits &amp; Design</td><td>UG</td><td>5th</td></tr>
+        <tr><td>6</td><td>Power Electronics</td><td>UG</td><td>6th</td></tr>
+        <tr><td>7</td><td>Elements of Power Electronics</td><td>UG</td><td>6th</td></tr>
+        <tr><td>8</td><td>Electric Power Transmission and Distribution</td><td>UG</td><td>7th</td></tr>
+        <tr><td>9</td><td>Power System Operation and Control</td><td>UG</td><td>7th</td></tr>
+        <tr><td>10</td><td>Electric Drives and Traction</td><td>UG</td><td>7th</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Publications</div>
+    <h2>Research publications</h2>
+    <h3>Peer-reviewed journal articles (SCI-indexed)</h3>
+    <ol class="pub-list">
+      <li>A. Mallick, J.K. Pradhan, R. Pradhan, P. Pratik, B.N. Kar, "Robust multi-input multi-output integral-proportional controller for interconnected microgrid operation," <em>Electric Power Systems Research</em>, vol. 253, p. 112509, 2026.</li>
+      <li>A. Mallick, J.K. Pradhan, R. Pradhan, K.S.K. Achary, S. Rath, A. Guha, "A gain scheduling control framework for mitigation of time varying network latency in autonomous AC microgrids," <em>IEEE Transactions on Industrial Informatics</em>, vol. 21, pp. 347–356, 2025.</li>
+      <li>B.N. Kar, P. Samuel, J.K. Pradhan, A. Mallick, "Grid-connected solar photovoltaic-fed brushless DC motor drive for water pumping system using colliding body optimization technique," <em>Circuit World</em>, vol. 50, pp. 18–34, 2024.</li>
+      <li>S. Panda, G.R. Biswal, J.K. Pradhan, B. Subudhi, A. Mallick, "Development of prototype fractional order controller for a grid-tied photovoltaic system," <em>IEEE Transactions on Circuits and Systems II: Express Briefs</em>, vol. 69, pp. 2171–2175, 2021.</li>
+    </ol>
+    <h3>Conference publications</h3>
+    <ol class="pub-list">
+      <li>A. Mallick, J.K. Pradhan, R. Pradhan, "Impact of communication delay and stability analysis of AC microgrid," in <em>Proc. International Conference on Power Electronics and Energy (ICPEE)</em>, KIIT Bhubaneswar, pp. 1–6, 2025.</li>
+      <li>A. Mallick, R. Singh, J.K. Pradhan, R. Pradhan, R.K. Mishra, "Event-driven control strategies for efficient microgrid operation," in <em>Proc. 4th International Conference on Smart Technologies for Power, Energy and Control (STPEC)</em>, NIT Goa, pp. 1–6, 2025.</li>
+    </ol>
+    <h3>Patents</h3>
+    <ol class="pub-list">
+      <li>J.K. Pradhan, Amit Mallick, M.K. Bera, R.K. Mishra, Vasundhara, "Fused DB37 distribution board for real-time simulator input/output with integrated channel wise protection," Application No. 202631051688, filed 23 April 2026 (Intellectual Property India).</li>
+      <li>J.K. Pradhan, Amit Mallick, M.K. Bera, R.K. Mishra, Vasundhara, "System for determining delay margin in alternating current microgrid and method of determining thereof," Application No. 202631051803, filed 23 April 2026 (Intellectual Property India).</li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sec-label">Student guidance</div>
+    <h2>M.Tech scholars supervised</h2>
+    <table>
+      <thead><tr><th>#</th><th>Scholar</th><th>Specialization</th><th>Year</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Sangram Sekhar</td><td>Power Electronics &amp; Control</td><td>June 2018</td></tr>
+        <tr><td>2</td><td>Manas Ranjan Jena</td><td>Power Electronics &amp; Control</td><td>June 2019</td></tr>
+        <tr><td>3</td><td>Deepak Kumar Bagal</td><td>Power Electronics &amp; Control</td><td>June 2020</td></tr>
+        <tr><td>4</td><td>Suvadipa Sahoo</td><td>Power System Engineering</td><td>June 2020</td></tr>
+        <tr><td>5</td><td>Himanshu Pradhan</td><td>Power Electronics &amp; Control</td><td>June 2021</td></tr>
+        <tr><td>6</td><td>Siddharth Choudhury</td><td>Power System Engineering</td><td>June 2021</td></tr>
+        <tr><td>7</td><td>Nishita Nayak (Dual Degree)</td><td>Power Electronics &amp; Control</td><td>May 2022</td></tr>
+        <tr><td>8</td><td>Anmol Hemron</td><td>Power Electronics &amp; Control</td><td>May 2022</td></tr>
+        <tr><td>9</td><td>Dhananjaya Mahakur (Dual Degree)</td><td>Power Electronics &amp; Control</td><td>May 2023</td></tr>
+        <tr><td>10</td><td>Yassir K. Y. Alumubaied</td><td>Power System Engineering</td><td>May 2024</td></tr>
+        <tr><td>11</td><td>Samrat Sahoo</td><td>Power Electronics &amp; Control</td><td>May 2025</td></tr>
+        <tr><td>12</td><td>Soumya Ranjan Bhoi</td><td>Power System Engineering</td><td>May 2026</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Workshops, FDPs, conferences &amp; training organised</div>
+    <h2>Events organised</h2>
+    <ul class="plain">
+      <li>Two-day workshop on "Protection and Control Techniques for Micro Grid & Its Challenges (PCMG 2020)," sponsored by TEQIP-3, organised by VSSUT, Burla, 2020.</li>
+    </ul>
+    <h3>Online video content developed</h3>
+    <ul class="plain">
+      <li>Digital Circuits Design — YouTube video series, "DCD Simplified" (<a href="https://www.youtube.com/@dcdsimplified6075" style="color:var(--brass);">youtube.com/@dcdsimplified6075</a>)</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-label">Workshops, FDPs, courses &amp; conferences attended</div>
+    <h2>Professional development</h2>
+    <table>
+      <thead><tr><th>#</th><th>Title</th><th>Organised by</th><th>Duration &amp; year</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Online STC & FDP on "Trends & Challenges in Cyber-Physical Energy Systems (TCCPES-2026)"</td><td>Dept. of EE, NIT Rourkela (ANRF-PAIR & IEEE Rourkela)</td><td>20–24 Mar 2026 (1 week)</td></tr>
+        <tr><td>2</td><td>FDP on "Theoretical Insights and Practical Strategies: Optimization, Control, Game Theory & RL (OCGR-2025)"</td><td>E&ICT Academy, NIT Patna (MeitY)</td><td>2–13 Jun 2025 (2 weeks)</td></tr>
+        <tr><td>3</td><td>1-week FDP on Python: Fundamentals to Advanced Applications (F2AA-2025)</td><td>VSSUT, Burla</td><td>19–23 May 2025</td></tr>
+        <tr><td>4</td><td>Online STC & FDP on "Innovation in Control and Learning for Dynamical Systems (ICLDS-2024)"</td><td>Dept. of EE, NIT Rourkela (IEEE Rourkela)</td><td>29 Nov–3 Dec 2024 (1 week)</td></tr>
+        <tr><td>5</td><td>Workshop on "Outcome Based Education (OBE-2024)"</td><td>VSSUT, Burla</td><td>4–6 Dec 2024 (3 days)</td></tr>
+        <tr><td>6</td><td>Workshop on "National Education Policy (NEP-2020)"</td><td>VSSUT, Burla</td><td>11 Dec 2024 (1 day)</td></tr>
+        <tr><td>7</td><td>One-day national seminar on "Recent Trends in Control System & Its Applications (RTCSA-2023)"</td><td>Dept. of EE & EEE, Seemanta Engineering College, Mayurbhanj</td><td>13 Oct 2023 (1 day)</td></tr>
+        <tr><td>8</td><td>FDP on Artificial Intelligence and Machine Learning</td><td>VSSUT, Burla</td><td>29 Oct–6 Nov 2022</td></tr>
+        <tr><td>9</td><td>2-week FDP on Advanced Optimization Techniques and hands-on with MATLAB/SCILAB</td><td>E&ICT Academy, NIT Patna, MNIT Jaipur, IIITDM Jabalpur (MeitY)</td><td>13–24 Jul 2020</td></tr>
+        <tr><td>10</td><td>2-week online course on Digital Transformation on Digital Learning Process</td><td>Swayam (IIT Bombay)</td><td>16–30 Mar 2020</td></tr>
+        <tr><td>11</td><td>AICTE-sponsored STTP on "Applications of Soft-Computing in Power System"</td><td>Dept. of EE & EEE, VSSUT, Burla</td><td>2–7 Dec 2019 (1 week)</td></tr>
+      </tbody>
+    </table>
+    <h3>Industrial training</h3>
+    <table>
+      <thead><tr><th>#</th><th>Training</th><th>Duration &amp; year</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Hirakud Hydro Electric Power, Burla, Sambalpur</td><td>2 weeks / 2025</td></tr>
+        <tr><td>2</td><td>Hirakud Hydro Electric Power and adjacent switch yard, Burla, Sambalpur</td><td>2 weeks / 2021</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Invited talks / resource person</div>
+    <h2>Invited talks &amp; expert lectures</h2>
+    <table>
+      <thead><tr><th>#</th><th>Programme</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Trends and Challenges in Cyber-Physical Energy Systems (TCCPES-2026), NIT Rourkela</td><td>Hands-on session with OPAL-RT demonstrating Analog I/O capability</td></tr>
+        <tr><td>2</td><td>Innovations in Control and Learning for Dynamical Systems (ICLDS-2024), NIT Rourkela</td><td>Hands-on session with HIL-based microgrid system</td></tr>
+        <tr><td>3</td><td>Robust and Nonlinear System Dynamics and Control (RNSDC-2020), VSSUT, Burla</td><td>Lecture on control and loop structure using MATLAB</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Professional memberships</div>
+    <h2>Memberships</h2>
+    <ul class="plain">
+      <li>IEEE — Graduate Student Membership No. 98106892</li>
+      <li>Indian Society for Technical Education — Membership ID 143189</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-label">Administrative &amp; institutional responsibilities</div>
+    <h2>Major responsibilities</h2>
+    <table>
+      <thead><tr><th>Responsibility</th><th>Level</th><th>Duration</th></tr></thead>
+      <tbody>
+        <tr><td>Electrical Maintenance Coordinator</td><td>University</td><td>2021–present</td></tr>
+        <tr><td>Document scrutiny committee (UG/PG/spot/lateral admissions)</td><td>University</td><td>Every academic year</td></tr>
+        <tr><td>Duty in Annual Techno-cultural Fest (SAMAVESH & VASSUNT) and Sports meet (ILLUMINA)</td><td>University</td><td>Every academic year</td></tr>
+        <tr><td>Anti-ragging invigilation</td><td>University</td><td>Every academic year</td></tr>
+        <tr><td>Convocation Apex committee, 14th/16th/17th (sound and electricity)</td><td>University</td><td>Almost every academic year</td></tr>
+        <tr><td>Assistant Warden, Rohini Hall of Residence</td><td>University</td><td>2019–2022</td></tr>
+        <tr><td>Mentor for UG students</td><td>Department</td><td>Every academic year</td></tr>
+        <tr><td>Faculty Advisor, Electrical Engineering Society</td><td>Department</td><td>2024–2026</td></tr>
+        <tr><td>NBA peer team visit (Criterion 5 preparation)</td><td>Department</td><td>2025</td></tr>
+        <tr><td>Coordinator, UG & PG viva (Dissertation Phase II)</td><td>Department</td><td>2022–2024</td></tr>
+        <tr><td>Syllabus preparation committee member</td><td>Department</td><td>2024</td></tr>
+        <tr><td>Departmental Techno-cultural fest organising committee (Resonance 2025)</td><td>Department</td><td>2024–2025</td></tr>
+        <tr><td>Exam coordinator, department</td><td>Department</td><td>2022–2024</td></tr>
+        <tr><td>Organised students' industrial visit — HHEP power house & MCL solar power plant</td><td>Department</td><td>2025</td></tr>
+        <tr><td>M.Tech admission scrutiny committee</td><td>Department</td><td>2023</td></tr>
+        <tr><td>PhD admission scrutiny committee</td><td>Department</td><td>2026</td></tr>
+        <tr><td>Departmental Research Group member</td><td>Department</td><td>2021–present</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Vision</div>
+    <h2>Vision for the university</h2>
+    <ul class="plain">
+      <li>Leading a VSSUT students' team to the prestigious ISRO IRoC-U 2028 Drone Challenge.</li>
+      <li>Implementation of a SCADA-based system to remotely monitor real-time power supply health across the college campus, led by an EE student project team.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Department of Electrical Engineering, VSSUT Burla, Odisha, India · <a href="index.html" style="color:var(--brass);">Back to profile</a>
+  </footer>
+</div>
+
+</body>
+</html>
