@@ -19,31 +19,33 @@
   body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;}
   .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
 
-  header.hero{border-bottom:2px solid var(--ink);padding:40px 0 24px;}
+  header.hero{border-bottom:2px solid var(--ink);padding:56px 0 32px;}
   .back{font-size:13px;color:var(--brass);text-decoration:none;display:inline-block;margin-bottom:16px;}
-  .hero-row{display:flex;align-items:center;gap:24px;}
-  .hero-media-group{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+  .hero-row{display:flex;align-items:center;gap:28px;}
+  .hero-media-group{display:flex;align-items:center;gap:16px;flex-shrink:0;order:2;}
   .hero-media{flex-shrink:0;}
   .hero-media img{
     display:block;
-    width:64px;
-    height:64px;
+    width:84px;
+    height:84px;
     object-fit:contain;
     border-radius:8px;
-    box-shadow:0 12px 18px -9px rgba(27,42,74,.45);
-    -webkit-box-reflect: below 3px linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.35) 85%);
+    box-shadow:0 14px 22px -10px rgba(27,42,74,.45);
+    -webkit-box-reflect: below 4px linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.35) 85%);
   }
   .hero-media.photo img{
     object-fit:cover;
-    width:70px;
-    height:70px;
+    width:92px;
+    height:92px;
   }
   .hero-text{flex:1;min-width:0;}
-  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:8px;}
-  h1{font-family:'Source Serif 4',serif;font-weight:700;font-size:32px;margin-bottom:6px;}
-  .role{font-size:15px;color:var(--ink-soft);}
-  .hero-links{margin-top:16px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:10px;}
+  h1{font-family:'Source Serif 4',serif;font-weight:700;font-size:38px;letter-spacing:.2px;margin-bottom:6px;}
+  .role{font-size:16px;color:var(--ink-soft);margin-bottom:2px;}
+  .affil{font-size:15px;color:var(--ink-soft);}
+  .hero-links{margin-top:20px;display:flex;gap:18px;flex-wrap:wrap;font-size:14px;}
   .hero-links a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--brass);padding-bottom:1px;}
+  .hero-links a:hover{color:var(--brass);}
 
   section{padding:36px 0;border-bottom:1px solid var(--line);}
   section:last-of-type{border-bottom:none;}
@@ -71,9 +73,9 @@
   .contact-grid p{font-size:14px;color:var(--ink);max-width:100%;}
 
   @media(max-width:600px){
-    h1{font-size:26px;}
-    .hero-media img{width:48px;height:48px;}
-    .hero-media.photo img{width:54px;height:54px;}
+    h1{font-size:28px;}
+    .hero-media img{width:56px;height:56px;}
+    .hero-media.photo img{width:64px;height:64px;}
   }
 </style>
 </head>
@@ -84,12 +86,12 @@
     <a class="back" href="index.html">&larr; Back to profile</a>
     <div class="hero-row">
       <div class="hero-text">
-        <div class="eyebrow">Curriculum vitae</div>
+        <div class="eyebrow">A Profile not a résumé</div>
         <h1>Amit Mallick</h1>
-        <div class="role">Assistant Professor, Department of Electrical Engineering, VSSUT, Burla</div>
+        <div class="role">Assistant Professor, Department of Electrical Engineering</div>
+        <div class="affil">Veer Surendra Sai University of Technology (VSSUT), Burla, Odisha, India</div>
         <div class="hero-links">
-          <a href="mailto:amitmallick_ee@vssut.ac.in">Email (Primary)</a>
-          <a href="mailto:amitmallickvssut@gmail.com">Email</a>
+          <a href="mailto:amitmallick_ee@vssut.ac.in">Email: amitmallick_ee@vssut.ac.in</a>
           <a href="https://orcid.org/0000-0002-9942-3649">ORCID</a>
           <a href="https://scholar.google.com/citations?user=b4BHcpYAAAAJ&hl=en">Google Scholar</a>
         </div>
