@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amit Mallick — Assistant Professor, EE, VSSUT Burla</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink:#1b2a4a;
+    --ink-soft:#3d4c6e;
+    --paper:#faf7ef;
+    --parchment:#efe7d3;
+    --line:#d8cdaf;
+    --brass:#8a6a2f;
+    --maroon:#6e2c2c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
+
+  header.hero{border-bottom:2px solid var(--ink);padding:56px 0 32px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:10px;}
+  h1{font-family:'Source Serif 4',serif;font-weight:700;font-size:38px;letter-spacing:.2px;margin-bottom:6px;}
+  .role{font-size:16px;color:var(--ink-soft);margin-bottom:2px;}
+  .affil{font-size:15px;color:var(--ink-soft);}
+  .hero-links{margin-top:20px;display:flex;gap:18px;flex-wrap:wrap;font-size:14px;}
+  .hero-links a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--brass);padding-bottom:1px;}
+  .hero-links a:hover{color:var(--brass);}
+
+  nav.subnav{display:flex;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--paper);z-index:10;flex-wrap:wrap;}
+  nav.subnav a{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);text-decoration:none;font-weight:500;}
+  nav.subnav a:hover{color:var(--ink);}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .sec-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:10px;}
+  h2{font-family:'Source Serif 4',serif;font-weight:600;font-size:22px;margin-bottom:16px;}
+  p{font-size:15px;color:var(--ink-soft);max-width:680px;}
+
+  .interest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px;}
+  .interest-card{background:var(--parchment);border:1px solid var(--line);border-radius:3px;padding:16px 18px;}
+  .interest-card .n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brass);margin-bottom:6px;}
+  .interest-card p{font-size:14px;margin:0;color:var(--ink);}
+
+  .course-list{list-style:none;margin-top:14px;}
+  .course-list li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .course-list li span.tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brass);white-space:nowrap;}
+
+  .placeholder-note{font-size:13px;color:var(--brass);background:var(--parchment);border-left:3px solid var(--brass);padding:10px 14px;border-radius:0 3px 3px 0;margin-top:16px;}
+
+  .pub-list{list-style:none;counter-reset:pub;margin-top:16px;}
+  .pub-list li{counter-increment:pub;padding:12px 0 12px 34px;position:relative;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);}
+  .pub-list li::before{content:counter(pub);position:absolute;left:0;top:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--brass);}
+
+  footer{padding:32px 0 60px;font-size:13px;color:var(--ink-soft);}
+  footer a{color:var(--brass);}
+
+  @media(max-width:600px){
+    h1{font-size:28px;}
+    nav.subnav{gap:14px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Faculty profile</div>
+    <h1>Amit Mallick</h1>
+    <div class="role">Assistant Professor, Department of Electrical Engineering</div>
+    <div class="affil">Veer Surendra Sai University of Technology (VSSUT), Burla, Odisha, India</div>
+    <div class="hero-links">
+      <a href="mailto:youremail@vssut.ac.in">Email</a>
+      <a href="#">Google Scholar</a>
+      <a href="#">ORCID</a>
+      <a href="#">CV (PDF)</a>
+    </div>
+  </header>
+
+  <nav class="subnav">
+    <a href="#research">Research</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#publications">Publications</a>
+    <a href="#students">Student guidance</a>
+    <a href="#service">Service</a>
+  </nav>
+
+  <section id="research">
+    <div class="sec-label">Research</div>
+    <h2>Robust, delay-resilient distributed secondary control for islanded AC microgrids</h2>
+    <p>Working on PhD research (VSSUT, Registration No. 2110050101) developing robust, delay-resilient distributed secondary control strategies for islanded autonomous AC microgrids, focused on maintaining voltage and frequency regulation and stable power sharing under communication delay and uncertainty.</p>
+    <div class="interest-grid">
+      <div class="interest-card"><div class="n">01</div><p>Microgrid control</p></div>
+      <div class="interest-card"><div class="n">02</div><p>Distributed secondary control</p></div>
+      <div class="interest-card"><div class="n">03</div><p>Power systems</p></div>
+      <div class="interest-card"><div class="n">04</div><p>Power electronics</p></div>
+    </div>
+  </section>
+
+  <section id="teaching">
+    <div class="sec-label">Teaching</div>
+    <h2>Courses</h2>
+    <p>Teaches across power systems, power electronics, and basic electrical engineering at the undergraduate and postgraduate level at VSSUT.</p>
+    <ul class="course-list">
+      <li><span>Power Systems</span> <span class="tag">Add course code / semester</span></li>
+      <li><span>Power Electronics</span> <span class="tag">Add course code / semester</span></li>
+      <li><span>Basic Electrical Engineering</span> <span class="tag">Add course code / semester</span></li>
+    </ul>
+    <div class="placeholder-note">Replace these rows with your actual current course codes, semesters, and any lecture notes or syllabus links.</div>
+  </section>
+
+  <section id="publications">
+    <div class="sec-label">Publications</div>
+    <h2>Selected publications</h2>
+    <ol class="pub-list">
+      <li>Add your first publication here — author list, title, journal/conference, year, DOI or link.</li>
+      <li>Add your second publication here.</li>
+      <li>Add your third publication here.</li>
+    </ol>
+    <div class="placeholder-note">Tip: export your entries from your Faculty Activity Register tracker and paste the "Journal publication" and "Conference" rows here.</div>
+  </section>
+
+  <section id="students">
+    <div class="sec-label">Student guidance</div>
+    <h2>M.Tech students guided</h2>
+    <p>Has guided multiple M.Tech students to completion at VSSUT.</p>
+    <div class="placeholder-note">Add a table here with student name, thesis title, and year of completion once you're ready to publish specifics.</div>
+  </section>
+
+  <section id="service">
+    <div class="sec-label">Service and administrative duties</div>
+    <h2>University service</h2>
+    <p>Holds departmental Electrical Maintenance Coordinator duties and other coordination roles at VSSUT.</p>
+    <div class="placeholder-note">List committee memberships, coordinator roles, and organizing responsibilities here as they accumulate.</div>
+  </section>
+
+  <footer>
+    Department of Electrical Engineering, VSSUT Burla, Odisha, India · Last updated <span id="updated"></span>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('updated').textContent = new Date().toLocaleDateString('en-IN', {year:'numeric', month:'long'});
+</script>
+
+</body>
+</html>
