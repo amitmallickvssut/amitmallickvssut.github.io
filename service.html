@@ -61,11 +61,27 @@
     </div>
 
     <div class="tabpanel active" id="tab-university">
-      <ul class="service-list" id="universityRows"></ul>
+      <ul class="service-list">
+        <li><span>Electrical Maintenance Coordinator</span><span class="dur">2021–present</span></li>
+        <li><span>Assistant Warden, Rohini Hall of Residence</span><span class="dur">2019–2022</span></li>
+        <li><span>Document scrutiny committee — UG/PG/spot/lateral admissions</span><span class="dur">Every academic year</span></li>
+        <li><span>Anti-ragging and fest invigilation</span><span class="dur">Every academic year</span></li>
+        <li><span>Convocation apex committee — sound and electricity</span><span class="dur">14th, 16th, 17th convocation</span></li>
+      </ul>
     </div>
 
     <div class="tabpanel" id="tab-department">
-      <ul class="service-list" id="departmentRows"></ul>
+      <ul class="service-list">
+        <li><span>Faculty Advisor, Electrical Engineering Society</span><span class="dur">2024–2026</span></li>
+        <li><span>M.Tech admission scrutiny committee</span><span class="dur">2023</span></li>
+        <li><span>PhD admission scrutiny committee</span><span class="dur">2026</span></li>
+        <li><span>Exam coordinator, department</span><span class="dur">2022–2024</span></li>
+        <li><span>UG/PG viva coordination — Dissertation Phase II</span><span class="dur">2022–2024</span></li>
+        <li><span>Departmental Research Group member</span><span class="dur">2021–present</span></li>
+        <li><span>Departmental fest organising committee — Resonance 2025</span><span class="dur">2024–2025</span></li>
+        <li><span>NBA peer team visit — Criterion 5 preparation</span><span class="dur">2025</span></li>
+        <li><span>UG student mentoring</span><span class="dur">Every academic year</span></li>
+      </ul>
     </div>
   </section>
 
@@ -79,17 +95,6 @@ function showTab(name){
   document.querySelectorAll('.tabbtn').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
   document.querySelectorAll('.tabpanel').forEach(p=>p.classList.toggle('active', p.id==='tab-'+name));
 }
-fetch('data/service.json').then(r=>r.json()).then(data=>{
-  const duties = data.duties || [];
-  const uni = duties.filter(d=>d.level==='University');
-  const dept = duties.filter(d=>d.level==='Department');
-  document.getElementById('universityRows').innerHTML = uni.map(d=>
-    `<li><span>${d.title}</span><span class="dur">${d.duration}</span></li>`).join('') || '<li>No entries yet.</li>';
-  document.getElementById('departmentRows').innerHTML = dept.map(d=>
-    `<li><span>${d.title}</span><span class="dur">${d.duration}</span></li>`).join('') || '<li>No entries yet.</li>';
-}).catch(()=>{
-  document.getElementById('universityRows').innerHTML = '<li>Could not load service data.</li>';
-});
 </script>
 </body>
 </html>
