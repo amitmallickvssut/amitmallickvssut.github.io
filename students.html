@@ -73,29 +73,7 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="hero">
-    <div class="hero-row">
-      <div class="hero-text">
-        <div class="eyebrow">A Profile not a résumé</div>
-        <h1>Amit Mallick</h1>
-        <div class="role">Assistant Professor, Department of Electrical Engineering</div>
-        <div class="affil">Veer Surendra Sai University of Technology (VSSUT), Burla, Odisha, India</div>
-        <div class="hero-links">
-          <a href="mailto:amitmallick_ee@vssut.ac.in">Email: amitmallick_ee@vssut.ac.in</a>
-          <a href="https://orcid.org/0000-0002-9942-3649">ORCID</a>
-          <a href="https://scholar.google.com/citations?user=b4BHcpYAAAAJ&hl=en">Google Scholar</a>
-        </div>
-      </div>
-      <div class="hero-media-group">
-        <div class="hero-media logo">
-          <img src="vssut-logo.svg" alt="VSSUT logo">
-        </div>
-        <div class="hero-media photo">
-          <img src="profile-photo.jpg" alt="Amit Mallick">
-        </div>
-      </div>
-    </div>
-  </header>
+  <div id="header-slot"></div>
 
   <nav class="subnav">
     <a href="index.html">Profile</a>
@@ -149,24 +127,7 @@
     </div>
   </section>
 
-  <section id="contact">
-    <div class="sec-label">Contact</div>
-    <h2>Get in touch</h2>
-    <div class="contact-grid">
-      <div>
-        <div class="contact-label">Address</div>
-        <p>[Add your department/postal address here]</p>
-      </div>
-      <div>
-        <div class="contact-label">Email</div>
-        <p>amitmallick_ee@vssut.ac.in<br>amitmallickvssut@gmail.com</p>
-      </div>
-      <div>
-        <div class="contact-label">Phone</div>
-        <p>[Add your contact number here]</p>
-      </div>
-    </div>
-  </section>
+  <div id="contact-slot"></div>
 
   <footer>
     Department of Electrical Engineering, VSSUT Burla, Odisha, India · <a href="index.html">Back to profile</a>
@@ -174,10 +135,18 @@
 </div>
 
 <script>
-function showTab(name){
-  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
-  document.querySelectorAll('.tabpanel').forEach(p=>p.classList.toggle('active', p.id==='tab-'+name));
-}
+  fetch('header-partial.html').then(r=>r.text()).then(html=>{
+    document.getElementById('header-slot').outerHTML = html;
+  }).catch(()=>{ console.error('Could not load header.'); });
+
+  fetch('contact-partial.html').then(r=>r.text()).then(html=>{
+    document.getElementById('contact-slot').outerHTML = html;
+  }).catch(()=>{ console.error('Could not load contact section.'); });
+
+  function showTab(name){
+    document.querySelectorAll('.tabbtn').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
+    document.querySelectorAll('.tabpanel').forEach(p=>p.classList.toggle('active', p.id==='tab-'+name));
+  }
 </script>
 </body>
 </html>
