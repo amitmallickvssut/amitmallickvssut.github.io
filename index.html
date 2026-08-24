@@ -25,18 +25,22 @@
   .hero-row{display:flex;align-items:center;gap:28px;}
   .hero-media-group{display:flex;align-items:center;gap:16px;flex-shrink:0;order:2;}
   .hero-media{flex-shrink:0;}
+  
   .hero-media img{
     display:block;
     width:120px;
     height:130px;
     object-fit:contain;
     border-radius:2px;
+    -webkit-box-reflect: below 2px linear-gradient(to bottom, rgba(255,255,255,.25), rgba(255,255,255,0) 20%);
+
   }
   .hero-media.photo img{
     object-fit:cover;
     width:120px;
     height:130px;
   }
+  
   .hero-text{flex:1;min-width:0;}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:10px;}
   h1{font-family:'Source Serif 4',serif;font-weight:700;font-size:38px;letter-spacing:.2px;margin-bottom:6px;}
