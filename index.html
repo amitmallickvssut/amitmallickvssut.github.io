@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Amit Mallick — Assistant Professor, EE, VSSUT Burla</title>
+<script src="quotes.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
@@ -192,6 +193,7 @@
 
   fetch('header-partial.html').then(r=>r.text()).then(html=>{
     document.getElementById('header-slot').outerHTML = html;
+    loadRandomQuote();
   }).catch(()=>{ console.error('Could not load header.'); });
 
   fetch('contact-partial.html').then(r=>r.text()).then(html=>{
