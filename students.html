@@ -57,6 +57,13 @@
   th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass);border-bottom:2px solid var(--ink);padding:8px;}
   td{padding:9px 8px;border-bottom:1px solid var(--line);}
   .placeholder-note{font-size:13px;color:var(--brass);background:var(--parchment);border-left:3px solid var(--brass);padding:10px 14px;border-radius:0 3px 3px 0;margin-top:16px;}
+  .own-research{background:var(--parchment);border-left:4px solid var(--brass);border-radius:0 4px 4px 0;padding:24px 28px;margin-bottom:32px;}
+  .own-research h3{font-family:'Source Serif 4',serif;font-weight:600;font-size:16px;margin-bottom:12px;color:var(--ink);}
+  .own-research-item{padding:10px 0;border-bottom:1px solid var(--line);}
+  .own-research-item:last-child{border-bottom:none;}
+  .own-research-item .rlabel{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--brass);}
+  .own-research-item .rtitle{font-size:14px;color:var(--ink);font-weight:500;margin-top:2px;}
+  .own-research-item .rmeta{font-size:13px;color:var(--ink-soft);margin-top:2px;}
   .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:18px;}
   .contact-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--brass);margin-bottom:6px;}
   .contact-grid p{font-size:14px;color:var(--ink);max-width:100%;}
@@ -89,6 +96,20 @@
     <h2>Students guided</h2>
     <p>Postgraduate and undergraduate students guided at VSSUT, Burla.</p>
 
+    <div class="own-research">
+      <h3>My Own Research Journey</h3>
+      <div class="own-research-item">
+        <div class="rlabel">M.Tech Thesis · 2015</div>
+        <div class="rtitle">A Study on Effects of Hydro Power Penetration on the Frequency Regulation Characteristics of Interconnected Power System</div>
+        <div class="rmeta">VSSUT, Burla · under the guidance of Dr. Manish Tripathy</div>
+      </div>
+      <div class="own-research-item">
+        <div class="rlabel">B.Tech Thesis · 2013</div>
+        <div class="rtitle">Detection of R-Peak Using Shifted Hilbert Transform Method</div>
+        <div class="rmeta">NM Institute of Engineering &amp; Technology, Bhubaneswar · under the guidance of Asst. Prof. P. Sahoo</div>
+      </div>
+    </div>
+
     <div class="tabbar">
       <button class="tabbtn active" data-tab="pg" onclick="showTab('pg')">Postgraduate (M.Tech)</button>
       <button class="tabbtn" data-tab="ug" onclick="showTab('ug')">Undergraduate (B.Tech)</button>
@@ -97,20 +118,20 @@
     <div class="tabpanel active" id="tab-pg">
       <p>12 M.Tech scholars guided to completion (2018–2026).</p>
       <table>
-        <thead><tr><th>#</th><th>Scholar</th><th>Specialization</th><th>Year</th></tr></thead>
+        <thead><tr><th>#</th><th>Scholar</th><th>Thesis / Project Title</th><th>Specialization</th><th>Year</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td>Sangram Sekhar</td><td>Power Electronics &amp; Control</td><td>June 2018</td></tr>
-          <tr><td>2</td><td>Manas Ranjan Jena</td><td>Power Electronics &amp; Control</td><td>June 2019</td></tr>
-          <tr><td>3</td><td>Deepak Kumar Bagal</td><td>Power Electronics &amp; Control</td><td>June 2020</td></tr>
-          <tr><td>4</td><td>Suvadipa Sahoo</td><td>Power System Engineering</td><td>June 2020</td></tr>
-          <tr><td>5</td><td>Himanshu Pradhan</td><td>Power Electronics &amp; Control</td><td>June 2021</td></tr>
-          <tr><td>6</td><td>Siddharth Choudhury</td><td>Power System Engineering</td><td>June 2021</td></tr>
-          <tr><td>7</td><td>Nishita Nayak (Dual Degree)</td><td>Power Electronics &amp; Control</td><td>May 2022</td></tr>
-          <tr><td>8</td><td>Anmol Hemron</td><td>Power Electronics &amp; Control</td><td>May 2022</td></tr>
-          <tr><td>9</td><td>Dhananjaya Mahakur (Dual Degree)</td><td>Power Electronics &amp; Control</td><td>May 2023</td></tr>
-          <tr><td>10</td><td>Yassir K. Y. Alumubaied</td><td>Power System Engineering</td><td>May 2024</td></tr>
-          <tr><td>11</td><td>Samrat Sahoo</td><td>Power Electronics &amp; Control</td><td>May 2025</td></tr>
-          <tr><td>12</td><td>Soumya Ranjan Bhoi</td><td>Power System Engineering</td><td>May 2026</td></tr>
+          <tr><td>1</td><td>Sangram Sekhar</td><td>Power Quality Improvement in a Three Phase Distribution System Using UPQC</td><td>Power Electronics &amp; Control</td><td>May 2018</td></tr>
+          <tr><td>2</td><td>Manas Ranjan Jena</td><td>Real-Time Simulation of Three Phase Induction Motor Speed Control Using Vector Control Method</td><td>Power Electronics &amp; Control</td><td>June 2019</td></tr>
+          <tr><td>3</td><td>Deepak Kumar Bagal</td><td>—</td><td>Power Electronics &amp; Control</td><td>June 2020</td></tr>
+          <tr><td>4</td><td>Suvadipa Sahoo</td><td>—</td><td>Power System Engineering</td><td>June 2020</td></tr>
+          <tr><td>5</td><td>Himanshu Pradhan</td><td>Power Factor Improvement of Distribution System with EV Chargers Using SVC</td><td>Power Electronics &amp; Control</td><td>June 2021</td></tr>
+          <tr><td>6</td><td>Siddharth Choudhury</td><td>—</td><td>Power System Engineering</td><td>June 2021</td></tr>
+          <tr><td>7</td><td>Nishita Nayak (Dual Degree)</td><td>Enhancement of Power Quality Using UPQC</td><td>Power Electronics &amp; Control</td><td>May 2022</td></tr>
+          <tr><td>8</td><td>Anmol Hemron</td><td>A Hybrid AC/DC Microgrid</td><td>Power Electronics &amp; Control</td><td>May 2022</td></tr>
+          <tr><td>9</td><td>Dhananjaya Mahakur (Dual Degree)</td><td>Islanding Detection Using PID Controller</td><td>Power Electronics &amp; Control</td><td>May 2023</td></tr>
+          <tr><td>10</td><td>Yassir K. Y. Alumubaied</td><td>Dynamic Wireless EVs Charging System by Resonant Inductive Power Transfer Method</td><td>Power System Engineering</td><td>May 2024</td></tr>
+          <tr><td>11</td><td>Samrat Sahoo</td><td>Active and Reactive Power Control of a Grid Connected Inverter Using PQ Control Strategy</td><td>Power Electronics &amp; Control</td><td>May 2025</td></tr>
+          <tr><td>12</td><td>Soumya Ranjan Bhoi</td><td>Consensus Based Distributed Secondary Control for Nominal Frequency and Voltage Regulation along with Proportional-Active Power Sharing</td><td>Power System Engineering</td><td>May 2026</td></tr>
         </tbody>
       </table>
     </div>
@@ -118,12 +139,17 @@
     <div class="tabpanel" id="tab-ug">
       <p>UG mentoring and project guidance at VSSUT, Burla.</p>
       <table>
-        <thead><tr><th>#</th><th>Project / team</th><th>Details</th><th>Year</th></tr></thead>
+        <thead><tr><th>#</th><th>Project Title</th><th>Students</th><th>Year</th></tr></thead>
         <tbody>
-          <tr><td>—</td><td>Add UG project title</td><td>Add student names / role</td><td>Add year</td></tr>
+          <tr><td>1</td><td>Detection of R-Peak Using Hilbert Transform Method</td><td>E. Rajlaxmi, Sandeep Kumar Lakra, Ranjan Kumar Majhi</td><td>April 2018</td></tr>
+          <tr><td>2</td><td>Efficient Power Transmission Using Multilevel Inverter</td><td>Mamali Mishra, Swaroop Behera, Yashobanta Mahali, Kanwaljeet Mohanty</td><td>2018</td></tr>
+          <tr><td>3</td><td>Reactive Power Usage Sharing of Unified Power Quality Conditioner Using Power Angle Control</td><td>Siddhant Paikaray, Prajnasmita Das, Nitish Kumar Sahoo</td><td>2019*</td></tr>
+          <tr><td>4</td><td>Current Sensorless Maximum Power Point Tracking Algorithm in Photovoltaic System</td><td>Sambit Kumar Nayak, Sudhansu Shekhar Mishra, Tushar Kanta Mishra, Sambit Priyadarshi Mohanta</td><td>2019</td></tr>
+          <tr><td>5</td><td>Classification of Faults in Power System Using Wavelet Transform and Artificial Neural Network</td><td>Soumya Ranjan Mishra, Tej Narayan Mishra, Priyanka Bag, Anshit Pradhan, Biswajit Mohanty, Debashish Das</td><td>May 2024</td></tr>
+          <tr><td>6</td><td>Predicting State of Charge of Battery using different kernel function in Machine Learning</td><td>Pranab Sahu, P. Shreetam Patra, Karan Patel, Ashish Kumar Mohapatra, Sumitra Barik, Suprabha Singh, Debashis Parida, Varish Kumar, Suchibrata Bhoi</td><td>Add year</td></tr>
         </tbody>
       </table>
-      <div class="placeholder-note">Will be updated soon</div>
+      <div class="placeholder-note">*Year not printed on cover; estimated from registration number series — please confirm. More UG projects will be added as photos are shared.</div>
     </div>
   </section>
 
