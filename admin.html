@@ -12,7 +12,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;}
-  .wrap{max-width:960px;margin:0 auto;padding:0 24px 60px;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px 60px;}
 
   header{border-bottom:2px solid var(--ink);padding:32px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
   header h1{font-family:'Fraunces',serif;font-weight:700;font-size:26px;}
@@ -30,27 +30,33 @@
 
   #adminPanel{display:none;}
 
-  .tabbar{display:flex;gap:8px;margin:24px 0;flex-wrap:wrap;}
-  .tabbtn{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.5px;padding:8px 14px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;border-radius:4px;}
-  .tabbtn.active{background:var(--ink);color:#faf7ef;border-color:var(--ink);}
+  .section-tabbar{display:flex;gap:8px;margin:24px 0 0;flex-wrap:wrap;}
+  .section-tabbtn{font-family:'Fraunces',serif;font-weight:600;font-size:14px;padding:10px 18px;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;border-radius:6px 6px 0 0;}
+  .section-tabbtn.active{background:var(--ink);color:#faf7ef;}
+  .section-panel{display:none;border:1px solid var(--ink);border-radius:0 6px 6px 6px;padding:24px;margin-bottom:30px;}
+  .section-panel.active{display:block;}
 
-  .tabpanel{display:none;}
-  .tabpanel.active{display:block;}
+  .sub-tabbar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+  .sub-tabbtn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:7px 12px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;border-radius:4px;}
+  .sub-tabbtn.active{background:var(--brass);color:#fff;border-color:var(--brass);}
+  .sub-panel{display:none;}
+  .sub-panel.active{display:block;}
 
-  .form-card{background:var(--parchment);border-radius:6px;padding:20px;margin-bottom:24px;}
-  .form-card h3{font-family:'Fraunces',serif;font-size:16px;margin-bottom:14px;}
+  .form-card{background:var(--parchment);border-radius:6px;padding:20px;margin-bottom:20px;}
+  .form-card h3{font-family:'Fraunces',serif;font-size:15px;margin-bottom:14px;}
   .field{margin-bottom:12px;}
   .field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass);margin-bottom:4px;font-family:'JetBrains Mono',monospace;}
   .field input, .field select, .field textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:4px;font-family:'Inter',sans-serif;font-size:14px;background:#fff;}
-  .field textarea{resize:vertical;min-height:50px;}
-  .form-actions{display:flex;gap:10px;margin-top:6px;}
+  .field small{display:block;color:var(--ink-soft);font-size:11px;margin-top:3px;}
+  .form-actions{display:flex;gap:10px;margin-top:6px;align-items:center;}
 
-  table{width:100%;border-collapse:collapse;font-size:14px;}
-  th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass);border-bottom:2px solid var(--ink);padding:8px;font-family:'JetBrains Mono',monospace;}
-  td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass);border-bottom:2px solid var(--ink);padding:7px;font-family:'JetBrains Mono',monospace;}
+  td{padding:8px 7px;border-bottom:1px solid var(--line);vertical-align:top;}
   .row-actions button{padding:4px 10px;font-size:12px;margin-right:6px;}
   .empty-row td{text-align:center;color:var(--ink-soft);padding:20px;}
   .status{font-size:13px;color:var(--brass);margin-top:10px;min-height:18px;}
+  .doc-link{color:var(--brass);font-size:12px;}
 </style>
 </head>
 <body>
@@ -58,8 +64,8 @@
 <div class="wrap">
   <header>
     <div>
-      <div class="eyebrow">Core Database</div>
-      <h1>Admin Login</h1>
+      <div class="eyebrow">SITE Admin</div>
+      <h1>ADMIN LOGIN</h1>
     </div>
     <div id="userBox"></div>
   </header>
@@ -72,8 +78,8 @@
   </div>
 
   <div id="adminPanel">
-    <div class="tabbar" id="tabbar"></div>
-    <div id="tabpanels"></div>
+    <div class="section-tabbar" id="sectionTabbar"></div>
+    <div id="sectionPanels"></div>
   </div>
 </div>
 
@@ -83,8 +89,11 @@
     getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut
   } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
   import {
-    getFirestore, collection, addDoc, getDocs, doc, deleteDoc, query, orderBy
+    getFirestore, collection, addDoc, getDocs, doc, deleteDoc
   } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+  import {
+    getStorage, ref, uploadBytes, getDownloadURL
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCblc6IaKw_46cSeM6Vi0ou_rN3vBFYqB8",
@@ -100,178 +109,326 @@
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const storage = getStorage(app);
   const provider = new GoogleAuthProvider();
 
-  const CATEGORIES = {
+  // ---- Data model: Section -> Subcategory -> { collection, fields, listCols } ----
+  const SECTIONS = {
+    research: {
+      label: "Research",
+      subcats: {
+        publications: {
+          label: "Publications", collection: "research_publications",
+          fields: [
+            { key: "title", label: "Title", type: "text" },
+            { key: "institution", label: "Institution / Journal / Venue", type: "text" },
+            { key: "period", label: "Date range / Period", type: "text", hint: "e.g. Jul 2024 – Dec 2024, or a single date" }
+          ],
+          listCols: ["title", "institution", "period"]
+        },
+        patents: {
+          label: "Patent", collection: "research_patents",
+          fields: [
+            { key: "title", label: "Title", type: "text" },
+            { key: "institution", label: "Institution / Office", type: "text" },
+            { key: "period", label: "Date range / Period", type: "text" }
+          ],
+          listCols: ["title", "institution", "period"]
+        },
+        fdps: {
+          label: "FDPs", collection: "research_fdps",
+          fields: [
+            { key: "title", label: "Title", type: "text" },
+            { key: "institution", label: "Institution / Organiser", type: "text" },
+            { key: "period", label: "Date range / Period", type: "text" }
+          ],
+          listCols: ["title", "institution", "period"]
+        },
+        online_courses: {
+          label: "Online Courses", collection: "research_online_courses",
+          fields: [
+            { key: "title", label: "Course title", type: "text" },
+            { key: "institution", label: "Platform / Institution", type: "text" },
+            { key: "period", label: "Date range / Period", type: "text" }
+          ],
+          listCols: ["title", "institution", "period"]
+        },
+        industrial_training: {
+          label: "Industrial Training", collection: "research_industrial_training",
+          fields: [
+            { key: "title", label: "Title", type: "text" },
+            { key: "institution", label: "Institution / Company", type: "text" },
+            { key: "period", label: "Date range / Period", type: "text" },
+            { key: "mode", label: "Mode", type: "select", options: ["Online", "Offline"] }
+          ],
+          listCols: ["title", "institution", "period", "mode"]
+        }
+      }
+    },
+    duty: {
+      label: "Duty",
+      subcats: {
+        university: {
+          label: "University Duty", collection: "duty_university",
+          fields: [
+            { key: "title", label: "Title", type: "text" },
+            { key: "period", label: "Date range / Period", type: "text" }
+          ],
+          listCols: ["title", "period"]
+        },
+        departmental: {
+          label: "Departmental Duty", collection: "duty_departmental",
+          fields: [
+            { key: "title", label: "Title", type: "text" },
+            { key: "period", label: "Date range / Period", type: "text" }
+          ],
+          listCols: ["title", "period"]
+        }
+      }
+    },
+    students: {
+      label: "Students",
+      subcats: {
+        ug_project: {
+          label: "UG Project", collection: "students_ug_project",
+          fields: [
+            { key: "thesisTitle", label: "Thesis / Project title", type: "text" },
+            { key: "studentName", label: "Student name(s)", type: "text" },
+            { key: "academicYear", label: "Academic year", type: "text" }
+          ],
+          listCols: ["thesisTitle", "studentName", "academicYear"]
+        },
+        pg_project: {
+          label: "PG Project", collection: "students_pg_project",
+          fields: [
+            { key: "thesisTitle", label: "Thesis title", type: "text" },
+            { key: "studentName", label: "Student name", type: "text" },
+            { key: "academicYear", label: "Academic year", type: "text" }
+          ],
+          listCols: ["thesisTitle", "studentName", "academicYear"]
+        }
+      }
+    },
     teaching: {
       label: "Teaching",
-      fields: [
-        { key: "title", label: "Course title", type: "text" },
-        { key: "level", label: "Level (UG/PG)", type: "text" },
-        { key: "semester", label: "Semester", type: "text" }
-      ],
-      listCols: ["title", "level", "semester"]
+      subcats: {
+        ug_subjects: {
+          label: "UG Subjects", collection: "teaching_ug",
+          fields: [
+            { key: "subjectTitle", label: "Subject title", type: "text" },
+            { key: "period", label: "Academic year / Period", type: "text" }
+          ],
+          listCols: ["subjectTitle", "period"]
+        },
+        pg_subjects: {
+          label: "PG Subjects", collection: "teaching_pg",
+          fields: [
+            { key: "subjectTitle", label: "Subject title", type: "text" },
+            { key: "period", label: "Academic year / Period", type: "text" }
+          ],
+          listCols: ["subjectTitle", "period"]
+        }
+      }
     },
-    publications: {
-      label: "Publications",
-      fields: [
-        { key: "type", label: "Type", type: "select", options: ["Journal", "Conference", "Patent", "Organised", "Invited Talk"] },
-        { key: "authors", label: "Authors", type: "text" },
-        { key: "title", label: "Title", type: "text" },
-        { key: "venue", label: "Venue / Journal / Office", type: "text" },
-        { key: "details", label: "Details (vol, pages, year, application no.)", type: "text" }
-      ],
-      listCols: ["type", "title", "venue"]
-    },
-    students_pg: {
-      label: "Students (PG)",
-      fields: [
-        { key: "name", label: "Scholar name", type: "text" },
-        { key: "regNo", label: "Registration number", type: "text" },
-        { key: "title", label: "Thesis / project title", type: "text" },
-        { key: "specialization", label: "Specialization", type: "text" },
-        { key: "year", label: "Year", type: "text" }
-      ],
-      listCols: ["name", "title", "year"]
-    },
-    students_ug: {
-      label: "Students (UG)",
-      fields: [
-        { key: "title", label: "Project title", type: "text" },
-        { key: "students", label: "Students (names with reg. numbers)", type: "textarea" },
-        { key: "year", label: "Year", type: "text" }
-      ],
-      listCols: ["title", "year"]
-    },
-    service: {
-      label: "Service",
-      fields: [
-        { key: "title", label: "Duty title", type: "text" },
-        { key: "level", label: "Level", type: "select", options: ["University", "Department"] },
-        { key: "duration", label: "Duration", type: "text" }
-      ],
-      listCols: ["title", "level", "duration"]
+    mentor: {
+      label: "Mentor",
+      subcats: {
+        ug_mentor: {
+          label: "UG Mentor", collection: "mentor_ug",
+          fields: [
+            { key: "year", label: "Year", type: "select", options: ["1", "2", "3", "4"] },
+            { key: "numStudents", label: "Number of students", type: "text" },
+            { key: "period", label: "Academic year / Period", type: "text" }
+          ],
+          listCols: ["year", "numStudents", "period"]
+        },
+        pg_mentor: {
+          label: "PG Mentor", collection: "mentor_pg",
+          fields: [
+            { key: "year", label: "Year", type: "select", options: ["1", "2"] },
+            { key: "numStudents", label: "Number of students", type: "text" },
+            { key: "period", label: "Academic year / Period", type: "text" }
+          ],
+          listCols: ["year", "numStudents", "period"]
+        }
+      }
     }
   };
 
-  const tabbar = document.getElementById("tabbar");
-  const tabpanels = document.getElementById("tabpanels");
+  const sectionTabbar = document.getElementById("sectionTabbar");
+  const sectionPanels = document.getElementById("sectionPanels");
 
   function buildUI() {
-    Object.keys(CATEGORIES).forEach((key, i) => {
-      const cat = CATEGORIES[key];
+    Object.keys(SECTIONS).forEach((secKey, si) => {
+      const sec = SECTIONS[secKey];
 
-      const btn = document.createElement("button");
-      btn.className = "tabbtn" + (i === 0 ? " active" : "");
-      btn.textContent = cat.label;
-      btn.onclick = () => showTab(key);
-      btn.dataset.tab = key;
-      tabbar.appendChild(btn);
+      const secBtn = document.createElement("button");
+      secBtn.className = "section-tabbtn" + (si === 0 ? " active" : "");
+      secBtn.textContent = sec.label;
+      secBtn.onclick = () => showSection(secKey);
+      secBtn.dataset.section = secKey;
+      sectionTabbar.appendChild(secBtn);
 
-      const panel = document.createElement("div");
-      panel.className = "tabpanel" + (i === 0 ? " active" : "");
-      panel.id = "panel-" + key;
+      const secPanel = document.createElement("div");
+      secPanel.className = "section-panel" + (si === 0 ? " active" : "");
+      secPanel.id = "section-" + secKey;
 
-      const formCard = document.createElement("div");
-      formCard.className = "form-card";
-      formCard.innerHTML = `<h3>Add ${cat.label} entry</h3><div id="form-${key}"></div>
-        <div class="form-actions">
-          <button onclick="window.saveEntry('${key}')">Save entry</button>
-        </div>
-        <div class="status" id="status-${key}"></div>`;
-      panel.appendChild(formCard);
+      const subTabbar = document.createElement("div");
+      subTabbar.className = "sub-tabbar";
+      secPanel.appendChild(subTabbar);
 
-      const formDiv = formCard.querySelector(`#form-${key}`);
-      cat.fields.forEach(f => {
-        const fieldDiv = document.createElement("div");
-        fieldDiv.className = "field";
-        let inputHtml;
-        if (f.type === "select") {
-          inputHtml = `<select id="input-${key}-${f.key}">` +
-            f.options.map(o => `<option value="${o}">${o}</option>`).join("") + `</select>`;
-        } else if (f.type === "textarea") {
-          inputHtml = `<textarea id="input-${key}-${f.key}"></textarea>`;
-        } else {
-          inputHtml = `<input type="text" id="input-${key}-${f.key}">`;
-        }
-        fieldDiv.innerHTML = `<label>${f.label}</label>${inputHtml}`;
-        formDiv.appendChild(fieldDiv);
+      Object.keys(sec.subcats).forEach((subKey, sj) => {
+        const sub = sec.subcats[subKey];
+        const fullKey = secKey + "__" + subKey;
+
+        const subBtn = document.createElement("button");
+        subBtn.className = "sub-tabbtn" + (sj === 0 ? " active" : "");
+        subBtn.textContent = sub.label;
+        subBtn.onclick = () => showSub(secKey, fullKey);
+        subBtn.dataset.sub = fullKey;
+        subTabbar.appendChild(subBtn);
+
+        const subPanel = document.createElement("div");
+        subPanel.className = "sub-panel" + (sj === 0 ? " active" : "");
+        subPanel.id = "sub-" + fullKey;
+
+        const formCard = document.createElement("div");
+        formCard.className = "form-card";
+        formCard.innerHTML = `<h3>Add ${sub.label} entry</h3><div id="form-${fullKey}"></div>`;
+        const formDiv = formCard.querySelector(`#form-${fullKey}`);
+
+        sub.fields.forEach(f => {
+          const fieldDiv = document.createElement("div");
+          fieldDiv.className = "field";
+          let inputHtml;
+          if (f.type === "select") {
+            inputHtml = `<select id="input-${fullKey}-${f.key}">` +
+              f.options.map(o => `<option value="${o}">${o}</option>`).join("") + `</select>`;
+          } else {
+            inputHtml = `<input type="text" id="input-${fullKey}-${f.key}">`;
+          }
+          fieldDiv.innerHTML = `<label>${f.label}</label>${inputHtml}` + (f.hint ? `<small>${f.hint}</small>` : "");
+          formDiv.appendChild(fieldDiv);
+        });
+
+        // supporting document upload — added to every subcategory
+        const fileFieldDiv = document.createElement("div");
+        fileFieldDiv.className = "field";
+        fileFieldDiv.innerHTML = `<label>Supporting document (optional)</label><input type="file" id="file-${fullKey}">`;
+        formDiv.appendChild(fileFieldDiv);
+
+        const actionsDiv = document.createElement("div");
+        actionsDiv.className = "form-actions";
+        actionsDiv.innerHTML = `<button onclick="window.saveEntry('${secKey}','${subKey}')">Save entry</button>
+          <span class="status" id="status-${fullKey}"></span>`;
+        formCard.appendChild(actionsDiv);
+
+        subPanel.appendChild(formCard);
+
+        const tableWrap = document.createElement("div");
+        tableWrap.innerHTML = `
+          <table>
+            <thead><tr>${sub.listCols.map(c => `<th>${c}</th>`).join("")}<th>Doc</th><th></th></tr></thead>
+            <tbody id="rows-${fullKey}"><tr class="empty-row"><td colspan="${sub.listCols.length + 2}">Loading…</td></tr></tbody>
+          </table>`;
+        subPanel.appendChild(tableWrap);
+
+        secPanel.appendChild(subPanel);
       });
 
-      const tableWrap = document.createElement("div");
-      tableWrap.innerHTML = `
-        <table>
-          <thead><tr>${cat.listCols.map(c => `<th>${c}</th>`).join("")}<th></th></tr></thead>
-          <tbody id="rows-${key}"><tr class="empty-row"><td colspan="${cat.listCols.length + 1}">Loading…</td></tr></tbody>
-        </table>`;
-      panel.appendChild(tableWrap);
-
-      tabpanels.appendChild(panel);
+      sectionPanels.appendChild(secPanel);
     });
   }
 
-  window.showTab = function(key) {
-    document.querySelectorAll(".tabbtn").forEach(b => b.classList.toggle("active", b.dataset.tab === key));
-    document.querySelectorAll(".tabpanel").forEach(p => p.classList.toggle("active", p.id === "panel-" + key));
+  window.showSection = function(secKey) {
+    document.querySelectorAll(".section-tabbtn").forEach(b => b.classList.toggle("active", b.dataset.section === secKey));
+    document.querySelectorAll(".section-panel").forEach(p => p.classList.toggle("active", p.id === "section-" + secKey));
   };
 
-  window.saveEntry = async function(key) {
-    const cat = CATEGORIES[key];
+  window.showSub = function(secKey, fullKey) {
+    const secPanel = document.getElementById("section-" + secKey);
+    secPanel.querySelectorAll(".sub-tabbtn").forEach(b => b.classList.toggle("active", b.dataset.sub === fullKey));
+    secPanel.querySelectorAll(".sub-panel").forEach(p => p.classList.toggle("active", p.id === "sub-" + fullKey));
+  };
+
+  window.saveEntry = async function(secKey, subKey) {
+    const sub = SECTIONS[secKey].subcats[subKey];
+    const fullKey = secKey + "__" + subKey;
     const data = {};
-    cat.fields.forEach(f => {
-      data[f.key] = document.getElementById(`input-${key}-${f.key}`).value.trim();
+    sub.fields.forEach(f => {
+      data[f.key] = document.getElementById(`input-${fullKey}-${f.key}`).value.trim();
     });
-    if (!data[cat.fields[0].key]) {
-      document.getElementById(`status-${key}`).textContent = "Please fill in the first field at least.";
+    if (!data[sub.fields[0].key]) {
+      document.getElementById(`status-${fullKey}`).textContent = "Please fill in the first field at least.";
       return;
     }
+    const statusEl = document.getElementById(`status-${fullKey}`);
+    const fileInput = document.getElementById(`file-${fullKey}`);
+    const file = fileInput.files[0];
+
     try {
-      await addDoc(collection(db, key), data);
-      cat.fields.forEach(f => {
-        document.getElementById(`input-${key}-${f.key}`).value = "";
+      if (file) {
+        statusEl.textContent = "Uploading document…";
+        const path = `${sub.collection}/${Date.now()}_${file.name}`;
+        const storageRef = ref(storage, path);
+        await uploadBytes(storageRef, file);
+        data.fileURL = await getDownloadURL(storageRef);
+        data.fileName = file.name;
+      }
+      await addDoc(collection(db, sub.collection), data);
+      sub.fields.forEach(f => {
+        document.getElementById(`input-${fullKey}-${f.key}`).value = "";
       });
-      document.getElementById(`status-${key}`).textContent = "Saved.";
-      loadEntries(key);
-      setTimeout(() => { document.getElementById(`status-${key}`).textContent = ""; }, 2500);
+      fileInput.value = "";
+      statusEl.textContent = "Saved.";
+      loadEntries(secKey, subKey);
+      setTimeout(() => { statusEl.textContent = ""; }, 2500);
     } catch (e) {
-      document.getElementById(`status-${key}`).textContent = "Error: " + e.message;
+      statusEl.textContent = "Error: " + e.message;
     }
   };
 
-  window.deleteEntry = async function(key, id) {
+  window.deleteEntry = async function(collectionName, id, secKey, subKey) {
     if (!confirm("Delete this entry?")) return;
     try {
-      await deleteDoc(doc(db, key, id));
-      loadEntries(key);
+      await deleteDoc(doc(db, collectionName, id));
+      loadEntries(secKey, subKey);
     } catch (e) {
       alert("Delete failed: " + e.message);
     }
   };
 
-  async function loadEntries(key) {
-    const cat = CATEGORIES[key];
-    const tbody = document.getElementById(`rows-${key}`);
+  async function loadEntries(secKey, subKey) {
+    const sub = SECTIONS[secKey].subcats[subKey];
+    const fullKey = secKey + "__" + subKey;
+    const tbody = document.getElementById(`rows-${fullKey}`);
     try {
-      const snap = await getDocs(collection(db, key));
+      const snap = await getDocs(collection(db, sub.collection));
       if (snap.empty) {
-        tbody.innerHTML = `<tr class="empty-row"><td colspan="${cat.listCols.length + 1}">No entries yet.</td></tr>`;
+        tbody.innerHTML = `<tr class="empty-row"><td colspan="${sub.listCols.length + 2}">No entries yet.</td></tr>`;
         return;
       }
       tbody.innerHTML = "";
       snap.forEach(docSnap => {
         const d = docSnap.data();
         const tr = document.createElement("tr");
-        tr.innerHTML = cat.listCols.map(c => `<td>${(d[c] || "").toString().slice(0,120)}</td>`).join("") +
-          `<td class="row-actions"><button class="danger" onclick="window.deleteEntry('${key}','${docSnap.id}')">Delete</button></td>`;
+        const docCell = d.fileURL
+          ? `<a class="doc-link" href="${d.fileURL}" target="_blank" rel="noopener">${d.fileName || "View"}</a>`
+          : "—";
+        tr.innerHTML = sub.listCols.map(c => `<td>${(d[c] || "").toString().slice(0,120)}</td>`).join("") +
+          `<td>${docCell}</td>` +
+          `<td class="row-actions"><button class="danger" onclick="window.deleteEntry('${sub.collection}','${docSnap.id}','${secKey}','${subKey}')">Delete</button></td>`;
         tbody.appendChild(tr);
       });
     } catch (e) {
-      tbody.innerHTML = `<tr class="empty-row"><td colspan="${cat.listCols.length + 1}">Could not load: ${e.message}</td></tr>`;
+      tbody.innerHTML = `<tr class="empty-row"><td colspan="${sub.listCols.length + 2}">Could not load: ${e.message}</td></tr>`;
     }
   }
 
   function loadAllEntries() {
-    Object.keys(CATEGORIES).forEach(loadEntries);
+    Object.keys(SECTIONS).forEach(secKey => {
+      Object.keys(SECTIONS[secKey].subcats).forEach(subKey => loadEntries(secKey, subKey));
+    });
   }
 
   document.getElementById("googleSignInBtn").addEventListener("click", async () => {
