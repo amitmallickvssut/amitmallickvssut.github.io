@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Amit Mallick</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+  :root{
+    --ink:#1b2a4a; --ink-soft:#3d4c6e; --paper:#faf7ef; --parchment:#efe7d3;
+    --line:#d8cdaf; --brass:#6b7d3a; --danger:#8c2f2f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px 60px;}
+
+  header{border-bottom:2px solid var(--ink);padding:32px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  header h1{font-family:'Fraunces',serif;font-weight:700;font-size:26px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--brass);margin-bottom:6px;}
+  #userBox{font-size:13px;color:var(--ink-soft);display:flex;align-items:center;gap:10px;}
+  button{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:8px 16px;border-radius:4px;border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;}
+  button.secondary{background:#fff;color:var(--ink);}
+  button.danger{background:var(--danger);border-color:var(--danger);}
+  button:hover{opacity:.88;}
+
+  #loginScreen{text-align:center;padding:100px 20px;}
+  #loginScreen h2{font-family:'Fraunces',serif;font-size:24px;margin-bottom:12px;}
+  #loginScreen p{color:var(--ink-soft);margin-bottom:24px;}
+  #loginError{color:var(--danger);font-size:13px;margin-top:14px;display:none;}
+
+  #adminPanel{display:none;}
+
+  .tabbar{display:flex;gap:8px;margin:24px 0;flex-wrap:wrap;}
+  .tabbtn{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.5px;padding:8px 14px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;border-radius:4px;}
+  .tabbtn.active{background:var(--ink);color:#faf7ef;border-color:var(--ink);}
+
+  .tabpanel{display:none;}
+  .tabpanel.active{display:block;}
+
+  .form-card{background:var(--parchment);border-radius:6px;padding:20px;margin-bottom:24px;}
+  .form-card h3{font-family:'Fraunces',serif;font-size:16px;margin-bottom:14px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass);margin-bottom:4px;font-family:'JetBrains Mono',monospace;}
+  .field input, .field select, .field textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:4px;font-family:'Inter',sans-serif;font-size:14px;background:#fff;}
+  .field textarea{resize:vertical;min-height:50px;}
+  .form-actions{display:flex;gap:10px;margin-top:6px;}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass);border-bottom:2px solid var(--ink);padding:8px;font-family:'JetBrains Mono',monospace;}
+  td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  .row-actions button{padding:4px 10px;font-size:12px;margin-right:6px;}
+  .empty-row td{text-align:center;color:var(--ink-soft);padding:20px;}
+  .status{font-size:13px;color:var(--brass);margin-top:10px;min-height:18px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Faculty site — admin</div>
+      <h1>Content Manager</h1>
+    </div>
+    <div id="userBox"></div>
+  </header>
+
+  <div id="loginScreen">
+    <h2>Sign in to manage your site content</h2>
+    <p>Only your authorized Google account can access this page.</p>
+    <button id="googleSignInBtn">Sign in with Google</button>
+    <div id="loginError"></div>
+  </div>
+
+  <div id="adminPanel">
+    <div class="tabbar" id="tabbar"></div>
+    <div id="tabpanels"></div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import {
+    getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  import {
+    getFirestore, collection, addDoc, getDocs, doc, deleteDoc, query, orderBy
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCblc6IaKw_46cSeM6Vi0ou_rN3vBFYqB8",
+    authDomain: "amitmallickvssut-github.firebaseapp.com",
+    projectId: "amitmallickvssut-github",
+    storageBucket: "amitmallickvssut-github.firebasestorage.app",
+    messagingSenderId: "348756414208",
+    appId: "1:348756414208:web:2fad1e5f4e0debfafb6de5"
+  };
+
+  const ALLOWED_EMAIL = "amitmallick_ee@vssut.ac.in";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
+
+  const CATEGORIES = {
+    teaching: {
+      label: "Teaching",
+      fields: [
+        { key: "title", label: "Course title", type: "text" },
+        { key: "level", label: "Level (UG/PG)", type: "text" },
+        { key: "semester", label: "Semester", type: "text" }
+      ],
+      listCols: ["title", "level", "semester"]
+    },
+    publications: {
+      label: "Publications",
+      fields: [
+        { key: "type", label: "Type", type: "select", options: ["Journal", "Conference", "Patent", "Organised", "Invited Talk"] },
+        { key: "authors", label: "Authors", type: "text" },
+        { key: "title", label: "Title", type: "text" },
+        { key: "venue", label: "Venue / Journal / Office", type: "text" },
+        { key: "details", label: "Details (vol, pages, year, application no.)", type: "text" }
+      ],
+      listCols: ["type", "title", "venue"]
+    },
+    students_pg: {
+      label: "Students (PG)",
+      fields: [
+        { key: "name", label: "Scholar name", type: "text" },
+        { key: "regNo", label: "Registration number", type: "text" },
+        { key: "title", label: "Thesis / project title", type: "text" },
+        { key: "specialization", label: "Specialization", type: "text" },
+        { key: "year", label: "Year", type: "text" }
+      ],
+      listCols: ["name", "title", "year"]
+    },
+    students_ug: {
+      label: "Students (UG)",
+      fields: [
+        { key: "title", label: "Project title", type: "text" },
+        { key: "students", label: "Students (names with reg. numbers)", type: "textarea" },
+        { key: "year", label: "Year", type: "text" }
+      ],
+      listCols: ["title", "year"]
+    },
+    service: {
+      label: "Service",
+      fields: [
+        { key: "title", label: "Duty title", type: "text" },
+        { key: "level", label: "Level", type: "select", options: ["University", "Department"] },
+        { key: "duration", label: "Duration", type: "text" }
+      ],
+      listCols: ["title", "level", "duration"]
+    }
+  };
+
+  const tabbar = document.getElementById("tabbar");
+  const tabpanels = document.getElementById("tabpanels");
+
+  function buildUI() {
+    Object.keys(CATEGORIES).forEach((key, i) => {
+      const cat = CATEGORIES[key];
+
+      const btn = document.createElement("button");
+      btn.className = "tabbtn" + (i === 0 ? " active" : "");
+      btn.textContent = cat.label;
+      btn.onclick = () => showTab(key);
+      btn.dataset.tab = key;
+      tabbar.appendChild(btn);
+
+      const panel = document.createElement("div");
+      panel.className = "tabpanel" + (i === 0 ? " active" : "");
+      panel.id = "panel-" + key;
+
+      const formCard = document.createElement("div");
+      formCard.className = "form-card";
+      formCard.innerHTML = `<h3>Add ${cat.label} entry</h3><div id="form-${key}"></div>
+        <div class="form-actions">
+          <button onclick="window.saveEntry('${key}')">Save entry</button>
+        </div>
+        <div class="status" id="status-${key}"></div>`;
+      panel.appendChild(formCard);
+
+      const formDiv = formCard.querySelector(`#form-${key}`);
+      cat.fields.forEach(f => {
+        const fieldDiv = document.createElement("div");
+        fieldDiv.className = "field";
+        let inputHtml;
+        if (f.type === "select") {
+          inputHtml = `<select id="input-${key}-${f.key}">` +
+            f.options.map(o => `<option value="${o}">${o}</option>`).join("") + `</select>`;
+        } else if (f.type === "textarea") {
+          inputHtml = `<textarea id="input-${key}-${f.key}"></textarea>`;
+        } else {
+          inputHtml = `<input type="text" id="input-${key}-${f.key}">`;
+        }
+        fieldDiv.innerHTML = `<label>${f.label}</label>${inputHtml}`;
+        formDiv.appendChild(fieldDiv);
+      });
+
+      const tableWrap = document.createElement("div");
+      tableWrap.innerHTML = `
+        <table>
+          <thead><tr>${cat.listCols.map(c => `<th>${c}</th>`).join("")}<th></th></tr></thead>
+          <tbody id="rows-${key}"><tr class="empty-row"><td colspan="${cat.listCols.length + 1}">Loading…</td></tr></tbody>
+        </table>`;
+      panel.appendChild(tableWrap);
+
+      tabpanels.appendChild(panel);
+    });
+  }
+
+  window.showTab = function(key) {
+    document.querySelectorAll(".tabbtn").forEach(b => b.classList.toggle("active", b.dataset.tab === key));
+    document.querySelectorAll(".tabpanel").forEach(p => p.classList.toggle("active", p.id === "panel-" + key));
+  };
+
+  window.saveEntry = async function(key) {
+    const cat = CATEGORIES[key];
+    const data = {};
+    cat.fields.forEach(f => {
+      data[f.key] = document.getElementById(`input-${key}-${f.key}`).value.trim();
+    });
+    if (!data[cat.fields[0].key]) {
+      document.getElementById(`status-${key}`).textContent = "Please fill in the first field at least.";
+      return;
+    }
+    try {
+      await addDoc(collection(db, key), data);
+      cat.fields.forEach(f => {
+        document.getElementById(`input-${key}-${f.key}`).value = "";
+      });
+      document.getElementById(`status-${key}`).textContent = "Saved.";
+      loadEntries(key);
+      setTimeout(() => { document.getElementById(`status-${key}`).textContent = ""; }, 2500);
+    } catch (e) {
+      document.getElementById(`status-${key}`).textContent = "Error: " + e.message;
+    }
+  };
+
+  window.deleteEntry = async function(key, id) {
+    if (!confirm("Delete this entry?")) return;
+    try {
+      await deleteDoc(doc(db, key, id));
+      loadEntries(key);
+    } catch (e) {
+      alert("Delete failed: " + e.message);
+    }
+  };
+
+  async function loadEntries(key) {
+    const cat = CATEGORIES[key];
+    const tbody = document.getElementById(`rows-${key}`);
+    try {
+      const snap = await getDocs(collection(db, key));
+      if (snap.empty) {
+        tbody.innerHTML = `<tr class="empty-row"><td colspan="${cat.listCols.length + 1}">No entries yet.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = "";
+      snap.forEach(docSnap => {
+        const d = docSnap.data();
+        const tr = document.createElement("tr");
+        tr.innerHTML = cat.listCols.map(c => `<td>${(d[c] || "").toString().slice(0,120)}</td>`).join("") +
+          `<td class="row-actions"><button class="danger" onclick="window.deleteEntry('${key}','${docSnap.id}')">Delete</button></td>`;
+        tbody.appendChild(tr);
+      });
+    } catch (e) {
+      tbody.innerHTML = `<tr class="empty-row"><td colspan="${cat.listCols.length + 1}">Could not load: ${e.message}</td></tr>`;
+    }
+  }
+
+  function loadAllEntries() {
+    Object.keys(CATEGORIES).forEach(loadEntries);
+  }
+
+  document.getElementById("googleSignInBtn").addEventListener("click", async () => {
+    document.getElementById("loginError").style.display = "none";
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (e) {
+      document.getElementById("loginError").textContent = "Sign-in failed: " + e.message;
+      document.getElementById("loginError").style.display = "block";
+    }
+  });
+
+  onAuthStateChanged(auth, (user) => {
+    if (user && user.email === ALLOWED_EMAIL) {
+      document.getElementById("loginScreen").style.display = "none";
+      document.getElementById("adminPanel").style.display = "block";
+      document.getElementById("userBox").innerHTML =
+        `Signed in as ${user.email} <button class="secondary" id="signOutBtn">Sign out</button>`;
+      document.getElementById("signOutBtn").onclick = () => signOut(auth);
+      loadAllEntries();
+    } else if (user && user.email !== ALLOWED_EMAIL) {
+      document.getElementById("loginError").textContent = `This page is restricted. Signed-in account (${user.email}) is not authorized.`;
+      document.getElementById("loginError").style.display = "block";
+      signOut(auth);
+    } else {
+      document.getElementById("loginScreen").style.display = "block";
+      document.getElementById("adminPanel").style.display = "none";
+      document.getElementById("userBox").innerHTML = "";
+    }
+  });
+
+  buildUI();
+</script>
+
+</body>
+</html>
